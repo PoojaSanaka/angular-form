@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>ngMessages demo</title>
+    <link rel='stylesheet' type='text/css' media='all' href="C:/Users/Gajula/Desktop/angularForm.css " >
+        </head>
+    <body ng-app="app" ng-controller="Mycontroller as Myctrl" >
+         <form name="exampleForm" class="elegant-aero" ng-submit="Myctrl.submit()">
+<label>First Name:</label>
+    <input type="text" name="userFirstName" ng-model="Myctrl.user.FirstName"  placeholder=" enter first name"required />
+    <div ng-messages="exampleForm.userFirstName.$error">
+      <div ng-message="required">*This field is required</div>
+    </div>
+
+<label>Last Name:</label>
+    <input type="text" name="userLastName" ng-model="Myctrl.user.LastName" placeholder="enter last name"required />
+    <div ng-messages="exampleForm.userLastName.$error">
+      <div ng-message="required">This field is required</div>
+    </div>
+
+<label>Email Address:</label>
+    <input type="email" name="userEmail" ng-model="Myctrl.user.Email"  placeholder="enter Email Address" required />
+    <div ng-messages="exampleForm.userEmail.$error">
+      <div ng-message="required">This field is required</div>
+      <div ng-message="email">Your email address is invalid</div>
+    </div>
+<label>Phone Number:</label>
+    <input type="text" name="userPhoneNumber" ng-model="Myctrl.user.PhoneNumber" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
+"  placeholder="enter the phone number" ng-minlength="10" ng-maxlength="10" required/>
+    <div ng-messages="exampleForm.userPhoneNumber.$error">
+      <div ng-message="required">This field is required</div>
+              <div ng-message="minlength">number must be over 10 characters</div>
+      <div ng-message="maxlength">number must be over 10 characters</div>
+
+      <div ng-message="pattern">Must be a valid 10 digit phone number</div>
+    </div>
+
+<label>User Message:</label>
+    <textarea type="text" name="userMessage"  rows="4" ng-model="Myctrl.user.Message" ng-minlength="10" ng-maxlength="100"                     placeholder="enter the message"required></textarea>
+    <div ng-messages="exampleForm.userMessage.$error">
+      <div ng-message="required">This field is required</div>
+      <div ng-message="minlength">Message must be over 10 characters</div>
+      <div ng-message="maxlength">Message must not exceed 100 characters</div>
+    </div>
+ <label>     <input name="conditions" ng-model="Myctrl.user.conditions" type="checkbox">
+                      I've read the terms and conditions
+                  </label>
+                
+             <p>
+<input type="submit"
+ng-disabled="ExampleForm.userFirstName.$dirty && ExampleForm.userFirstName.$invalid ||<br> 
+ExampleForm.userLastName.$dirty && ExampleForm.userLastName.$invalid || <br>
+ExampleForm.userEmail.$dirty && ExampleForm.userEmail.$invalid || <br>
+ExampleForm.userPhoneNumber.$dirty && ExampleForm.userPhoneNumber.$invalid || <br>
+ExampleForm.userMessage.$dirty && ExampleForm.userMessage.$invalid">
+                 
+</p>
+                  
+  </form>
+         
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-messages.min.js"></script>
+     <script> 
+         var app = angular.module('app', ['ngMessages'])
+         .controller('Mycontroller',[function(){
+             var self=this;
+             self.submit=function() {
+                 document.write('form submitted \n',"<br>",self.user.FirstName,"<br>",self.user.LastName,"<br>",self.user.Email,"<br>",self.user.PhoneNumber,"<br>",self.user.Message);
+             };
+         }]);
+    </script>
+
+</body>
+</html>
